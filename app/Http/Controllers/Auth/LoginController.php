@@ -44,6 +44,9 @@ class LoginController extends Controller
      * @param  mixed  $user
      * @return mixed
      */
+     public function loginForm(){
+       return view('auth.login');
+     }
     protected function authenticated(Request $request, $user)
     {
         //

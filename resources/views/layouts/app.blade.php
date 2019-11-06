@@ -6,13 +6,10 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <!-- <meta property="og:title" content="TheSaaS">
-    <meta property="og:description" content="A responsive, professional, and multipurpose SaaS, Software, Startup and WebApp landing template powered by Bootstrap 4.">
-    <meta property="og:image" content="http://thetheme.io/thesaas/assets/img/og-img.jpg">
-    <meta property="og:url" content="http://thetheme.io/thesaas/">
-    <meta name="twitter:card" content="summary_large_image"> -->
 
     <title>Laracasts clone</title>
+    <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="/assets/css/core.min.css" rel="stylesheet">
     <link href="/assets/css/thesaas.min.css" rel="stylesheet">
     <link href="/assets/css/style.css" rel="stylesheet">
@@ -23,8 +20,7 @@
 
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
 </head>
 <body>
     <div id="app">
@@ -45,7 +41,7 @@
           <div class="topbar-right">
             <ul class="topbar-nav nav">
               <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
-              <li class="nav-item"><a class="nav-link" href="javascript:;" data-toggle="modal" data-target="#loginModal">Login</a></li>
+              <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
               <!-- <li class="nav-item">
                 <a class="nav-link" href="#">Samples <i class="fa fa-caret-down"></i></a>
                 <div class="nav-submenu">
@@ -79,7 +75,7 @@
             @yield('content')
         </main>
 
-        <vue-login><vue-login>
+
 
     </div>
 </body>

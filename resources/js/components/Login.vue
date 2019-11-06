@@ -1,11 +1,5 @@
 <template>
-  <div>
 
-  <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="card card-shadowed p-50 w-400 mb-0" style="max-width: 100%">
-        <h5 class="text-uppercase text-center">Login</h5>
-        <br><br>
 
         <form>
           <div class="form-group">
@@ -30,18 +24,6 @@
             <button class="btn btn-bold btn-block btn-primary" :disabled="!isValidLoginForm" type="submit">Login</button>
           </div>
         </form>
-
-
-
-        <hr class="w-30">
-
-        <p class="text-center text-muted fs-13 mt-20">Don't have an account? <a href="page-register.html">Sign up</a></p>
-      </div>
-
-    </div>
-  </div>
-
-</div>
 </template>
 
 <script>
