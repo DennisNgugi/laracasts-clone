@@ -1725,12 +1725,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       email: '',
       password: '',
-      remember: true
+      remember: true,
+      errors: []
     };
   },
   computed: {
@@ -1745,6 +1751,26 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       return false;
+    },
+    attemptLogin: function attemptLogin() {
+      var _this = this;
+
+      this.errors = [];
+      axios.post('/login', {
+        email: this.email,
+        password: this.password,
+        remember: this.remember
+      }).then(function (resp) {
+        console.log(resp);
+      })["catch"](function (error) {
+        console.log(error);
+
+        if (error.response.status == 422) {
+          _this.errors.push("We couldnt verify your account details");
+        } else {
+          _this.errors.push("Something went wrong , please try again");
+        }
+      });
     }
   },
   mounted: function mounted() {
@@ -37060,74 +37086,152 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("form", [
-    _vm._m(0),
+  return _c("div", [
+    _vm.errors.length > 0
+      ? _c(
+          "ul",
+          { staticClass: "list-group alert alert-danger" },
+          _vm._l(_vm.errors, function(error) {
+            return _c(
+              "li",
+              {
+                key: _vm.errors.indexOf(error),
+                staticClass: "list-group-item"
+              },
+              [_vm._v(_vm._s(error))]
+            )
+          }),
+          0
+        )
+      : _vm._e(),
     _vm._v(" "),
-    _vm._m(1),
-    _vm._v(" "),
-    _vm._m(2),
-    _vm._v(" "),
-    _c("div", { staticClass: "form-group" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-bold btn-block btn-primary",
-          attrs: { disabled: !_vm.isValidLoginForm, type: "submit" }
-        },
-        [_vm._v("Login")]
-      )
+    _c("form", { attrs: { autocomplete: "off" } }, [
+      _c("div", { staticClass: "form-group" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.email,
+              expression: "email"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: { type: "email", placeholder: "Email" },
+          domProps: { value: _vm.email },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.email = $event.target.value
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.password,
+              expression: "password"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: { type: "password", placeholder: "Password" },
+          domProps: { value: _vm.password },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.password = $event.target.value
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group flexbox py-10" }, [
+        _c("label", { staticClass: "custom-control custom-checkbox" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.remember,
+                expression: "remember"
+              }
+            ],
+            staticClass: "custom-control-input",
+            attrs: { type: "checkbox", checked: "" },
+            domProps: {
+              checked: Array.isArray(_vm.remember)
+                ? _vm._i(_vm.remember, null) > -1
+                : _vm.remember
+            },
+            on: {
+              change: function($event) {
+                var $$a = _vm.remember,
+                  $$el = $event.target,
+                  $$c = $$el.checked ? true : false
+                if (Array.isArray($$a)) {
+                  var $$v = null,
+                    $$i = _vm._i($$a, $$v)
+                  if ($$el.checked) {
+                    $$i < 0 && (_vm.remember = $$a.concat([$$v]))
+                  } else {
+                    $$i > -1 &&
+                      (_vm.remember = $$a
+                        .slice(0, $$i)
+                        .concat($$a.slice($$i + 1)))
+                  }
+                } else {
+                  _vm.remember = $$c
+                }
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("span", { staticClass: "custom-control-indicator" }),
+          _vm._v(" "),
+          _c("span", { staticClass: "custom-control-description" }, [
+            _vm._v("Remember me")
+          ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "text-muted hover-primary fs-13",
+            attrs: { href: "#" }
+          },
+          [_vm._v("Forgot password?")]
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-bold btn-block btn-primary",
+            attrs: { type: "submit" },
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                return _vm.attemptLogin()
+              }
+            }
+          },
+          [_vm._v("Login")]
+        )
+      ])
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("input", {
-        staticClass: "form-control",
-        attrs: { type: "email", placeholder: "Email" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("input", {
-        staticClass: "form-control",
-        attrs: { type: "password", placeholder: "Password" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group flexbox py-10" }, [
-      _c("label", { staticClass: "custom-control custom-checkbox" }, [
-        _c("input", {
-          staticClass: "custom-control-input",
-          attrs: { type: "checkbox", checked: "" }
-        }),
-        _vm._v(" "),
-        _c("span", { staticClass: "custom-control-indicator" }),
-        _vm._v(" "),
-        _c("span", { staticClass: "custom-control-description" }, [
-          _vm._v("Remember me")
-        ])
-      ]),
-      _vm._v(" "),
-      _c(
-        "a",
-        { staticClass: "text-muted hover-primary fs-13", attrs: { href: "#" } },
-        [_vm._v("Forgot password?")]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -49401,9 +49505,15 @@ __webpack_require__.r(__webpack_exports__);
 /*!*******************************!*\
   !*** ./resources/js/login.js ***!
   \*******************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_1__);
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -49412,8 +49522,11 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
-Vue.component('vue-login', __webpack_require__(/*! ./components/Login.vue */ "./resources/js/components/Login.vue")["default"]);
-var app = new Vue({
+
+
+vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(axios__WEBPACK_IMPORTED_MODULE_0___default.a);
+vue__WEBPACK_IMPORTED_MODULE_1___default.a.component('vue-login', __webpack_require__(/*! ./components/Login.vue */ "./resources/js/components/Login.vue")["default"]);
+var app = new vue__WEBPACK_IMPORTED_MODULE_1___default.a({
   el: '#login'
 });
 

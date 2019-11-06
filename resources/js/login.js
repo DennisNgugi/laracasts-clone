@@ -7,7 +7,10 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+import axios from 'axios'
+import Vue from 'vue'
 
+Vue.use(axios)
 
 Vue.component('vue-login', require('./components/Login.vue').default);
 

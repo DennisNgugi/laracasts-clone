@@ -41,7 +41,12 @@
           <div class="topbar-right">
             <ul class="topbar-nav nav">
               <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+              @if(auth()->check())
+              <li class="nav-item">Welcome {{auth()->user()->name}}</li>
+              @else
               <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+
+              @endif
               <!-- <li class="nav-item">
                 <a class="nav-link" href="#">Samples <i class="fa fa-caret-down"></i></a>
                 <div class="nav-submenu">

@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace Dennis\Http\Controllers\Auth;
+use Dennis\Exceptions\AuthFailedException;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use Dennis\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
@@ -52,5 +53,17 @@ class LoginController extends Controller
         //
         return 'login success';
 
+    }
+    /**
+     * Get the failed login response instance.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    protected function sendFailedLoginResponse(Request $request)
+    {
+      throw new AuthFailedException;
     }
 }
