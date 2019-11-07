@@ -19,6 +19,9 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/login','Auth\LoginController@loginForm');
+Route::middleware('admin')->prefix('admin')->group(function(){
+  Route::resource('series','SeriesController');
+});
 Route::get('/logout',function(){
   auth()->logout();
 });

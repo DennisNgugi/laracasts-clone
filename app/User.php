@@ -36,4 +36,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function isAdmin(){
+      // it checks for the email in the config folder under administer.php created by me
+      return in_array($this->email,config('administer.administrators'));
+    }
 }
