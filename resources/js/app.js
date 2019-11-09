@@ -9,7 +9,7 @@ require('./bootstrap');
 window.Vue = require('vue');
 
 
-//Vue.component('vue-login', require('./components/Login.vue').default);
+Vue.component('vue-lessons', require('./components/Lessons.vue').default);
 
 
 

@@ -1,7 +1,7 @@
 <?php
 
 namespace Dennis\Http\Controllers;
-
+use Dennis\Series;
 use Dennis\Lesson;
 use Illuminate\Http\Request;
 
@@ -33,9 +33,10 @@ class LessonController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Series $series,Request $request)
     {
         //
+        return $series->lessons()->create($request->all());
     }
 
     /**
@@ -67,9 +68,12 @@ class LessonController extends Controller
      * @param  \Dennis\Lesson  $lesson
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Lesson $lesson)
+    public function update(Request $request, Series $series, Lesson $lesson)
     {
         //
+        $lesson->update($request->all());
+
+        return $lesson->fresh();
     }
 
     /**
@@ -78,8 +82,11 @@ class LessonController extends Controller
      * @param  \Dennis\Lesson  $lesson
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Lesson $lesson)
+    public function destroy(Series $series,Lesson $lesson)
     {
         //
+         $lesson->delete();
+
+         return response()->json(['status'=> 'ok'],200);
     }
 }

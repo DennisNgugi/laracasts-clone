@@ -24,9 +24,9 @@
 
         <div class="row gap y">
           <div class="col-md-12">
-            <h5 class="text-center">Create series</h5>
+            <h5 class="text-center my-4">Create series</h5>
             <br>
-
+            <vue-lessons default_lessons="{{$series->lessons}}" series_id="{{$series->id}}"></vue-lessons>
           </div>
 
 

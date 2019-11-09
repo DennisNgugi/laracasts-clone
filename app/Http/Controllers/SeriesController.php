@@ -13,8 +13,8 @@ class SeriesController extends Controller
      */
     public function index()
     {
-        //
-        // return view('admin.series.index');
+        $series = Series::all();
+         return view('admin.series.all')->withSeries($series);
     }
 
     /**
@@ -66,14 +66,15 @@ class SeriesController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified resource
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Series $series)
     {
         //
+        return view('admin.series.edit')->withSeries($series);
     }
 
     /**
@@ -83,9 +84,9 @@ class SeriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Series $series)
     {
-        //
+
     }
 
     /**
